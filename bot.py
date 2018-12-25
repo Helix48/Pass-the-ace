@@ -12,40 +12,67 @@ y = np.array((  [0],
 
 class AceBot:
     def __init__(self):
-        self.inputSize = 2
-        self.outputSize = 1
-        self.hiddenSize = 3
-
-        self.W1 = np.random.randn(self.inputSize, self.hiddenSize)
-        self.W2 = np.random.randn(self.hiddenSize, self.outputSize)
+        self.inputSize =  2
+        self.outputSize =  1
+        self.hiddenSize =  3
+  
+        self.w0 = np.random.randn(self.inputSize, self.hiddenSize) # weights for the input to hidde n
+        self.w1 = np.random.randn(self.hiddenSize, self.outputSize) # weights for hidden to output
     
     def forward(self, X):
-        self.z = np.dot(X, self.W1)
-        self.z2 = self.sigmoid(self.z)
-        self.z3 = np.dot(self.z2, self.W2)
-        o = self.sigmoid(self.z3)
+        self.h = np.dot(X, self.w0)  # mult the weights with the input, then add them together 
+        self.h = self.sigmoid(self.h) # activation function
+        self.o = np.dot(self.h, self.w1) # mult the hidden layer with the hidden weights the add 
+        o = self.sigmoid(self.o) # activation function 
 
         return o
     
     def sigmoid(self, s):
-        return 1/(1+np.exp(-s))
-        
+        return 1/(1+np.exp(-s)) 
     def sigmoidPrime(self, s):
         return s*(1-s)
 
     def backward(self, X, y, o):
-        self.o_error = y - o
-        self.o_delta = self.o_error*self.sigmoidPrime(o)
+        o_error = y-o # error of output
+        o_delta = o_error * self.sigmoidPrime(self.o)
 
-        self.z2_error = self.o_delta.dot(self.W2.T) 
-        self.z2_delta = self.z2_error*self.sigmoidPrime(self.z2)
+        h_error = np.dot(o_error, self.w1.T) 
+        h_delta = h_error * self.sigmoidPrime(self.h)
 
-        self.W1 += X.T.dot(self.z2_delta)
-        self.W2 += self.z2.T.dot(self.o_delta) 
+        self.w0 += np.dot(X[:,None], np.reshape(h_delta, (1,3)))
+        self.w1 += np.dot(self.h[:,None], o_delta)[:,None]
+
+    def getMove(self, X):
+        buff = self.forward(X)
+        if buff > 0.5:
+            return 1
+        else:
+            return 0
 
     def train (self, X, y):
         o = self.forward(X)
         self.backward(X, y, o)
 
-NN = AceBot()
-NN.forward([2, 4])
+#Example definition
+
+aceBot = AceBot()  # New instance of bot
+cardAndPlayers = np.array(([1, 13]), dtype=float)  # Define the card value and the number of players
+prediction = aceBot.forward(cardAndPlayers)  # Shows the prediction of the results
+#print(prediction)
+move = np.around(aceBot.forward(cardAndPlayers))   # Same value as prediction but rounds up or down
+#print(move)
+
+# After the game is done you need to train off the results
+# If it won set the input to what it's move was and if it lost
+# set it to the opposite one
+buff = np.bitwise_xor(move.astype(int), np.array(([1]), dtype=int))
+buff = buff.astype(float)
+#print(buff)
+did_win = False  # Lets say it won 
+aceBot.train(cardAndPlayers, move)
+if did_win:
+    aceBot.train(cardAndPlayers, move) # If it won than feed it the move it did
+else:
+    aceBot.train(cardAndPlayers, buff)
+
+# repeat this process until alphaZero
