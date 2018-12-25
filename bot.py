@@ -48,3 +48,4 @@ class AceBot:
         self.backward(X, y, o)
 
 NN = AceBot()
+NN.forward([2, 4])
