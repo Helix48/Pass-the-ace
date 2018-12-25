@@ -47,6 +47,7 @@ class AceBot:
         o = self.forward(X)
         self.backward(X, y, o)
 
+<<<<<<< HEAD
 
 NN = AceBot()
 o = NN.forward(X)
@@ -54,3 +55,7 @@ print(o)
 NN.train(X, y)
 o = NN.forward(X)
 print(o)
+=======
+NN = AceBot()
+NN.forward([2, 4])
+>>>>>>> origin/master
