@@ -1,1 +1,1 @@
-print("ur mum gey")
+print("ur is mum gey")
