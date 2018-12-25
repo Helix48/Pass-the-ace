@@ -29,10 +29,22 @@ class AceBot:
     
     def sigmoid(self, s):
         return 1/(1+np.exp(-s))
-    
+        
+    def sigmoidPrime(self, s):
+        return s*(1-s)
+
+    def backward(self, X, y, o):
+        self.o_error = y - o
+        self.o_delta = self.o_error*self.sigmoidPrime(o)
+
+        self.z2_error = self.o_delta.dot(self.W2.T) 
+        self.z2_delta = self.z2_error*self.sigmoidPrime(self.z2)
+
+        self.W1 += X.T.dot(self.z2_delta)
+        self.W2 += self.z2.T.dot(self.o_delta) 
+
+    def train (self, X, y):
+        o = self.forward(X)
+        self.backward(X, y, o)
+
 NN = AceBot()
-
-o = NN.forward(X)
-
-print("actual: " + y)
-print("predicted"+ o)
