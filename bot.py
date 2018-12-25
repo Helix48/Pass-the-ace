@@ -49,6 +49,14 @@ class AceBot:
         else:
             return 0
 
+    def isCorrect(self, didWin, move):
+        buff = np.bitwise_xor(move.astype(int), np.array(([1]), dtype=int))
+        buff = buff.astype(float)
+        if didWin:
+            self.train(cardAndPlayers, move) # If it won than feed it the move it did
+        else:
+            self.train(cardAndPlayers, buff)
+
     def train (self, X, y):
         o = self.forward(X)
         self.backward(X, y, o)
@@ -57,22 +65,76 @@ class AceBot:
 
 aceBot = AceBot()  # New instance of bot
 cardAndPlayers = np.array(([1, 13]), dtype=float)  # Define the card value and the number of players
+
 prediction = aceBot.forward(cardAndPlayers)  # Shows the prediction of the results
-#print(prediction)
+print("prediction be: ", prediction)
 move = np.around(aceBot.forward(cardAndPlayers))   # Same value as prediction but rounds up or down
-#print(move)
+print("move be: ", move)
 
-# After the game is done you need to train off the results
-# If it won set the input to what it's move was and if it lost
-# set it to the opposite one
-buff = np.bitwise_xor(move.astype(int), np.array(([1]), dtype=int))
-buff = buff.astype(float)
-#print(buff)
-did_win = False  # Lets say it won 
-aceBot.train(cardAndPlayers, move)
-if did_win:
-    aceBot.train(cardAndPlayers, move) # If it won than feed it the move it did
-else:
-    aceBot.train(cardAndPlayers, buff)
+aceBot.isCorrect(True, move) #after the game is done use the isCorrect to tell the bot if the move was good or not so it can train
+prediction = aceBot.forward(cardAndPlayers)  # Shows the prediction of the results
+print("prediction be: ", prediction)
+move = np.around(aceBot.forward(cardAndPlayers))   # Same value as prediction but rounds up or down
+print("move be: ", move)
 
-# repeat this process until alphaZero
+aceBot.isCorrect(True, move) #after the game is done use the isCorrect to tell the bot if the move was good or not so it can train
+prediction = aceBot.forward(cardAndPlayers)  # Shows the prediction of the results
+print("prediction be: ", prediction)
+move = np.around(aceBot.forward(cardAndPlayers))   # Same value as prediction but rounds up or down
+print("move be: ", move)
+
+aceBot.isCorrect(True, move) #after the game is done use the isCorrect to tell the bot if the move was good or not so it can train
+prediction = aceBot.forward(cardAndPlayers)  # Shows the prediction of the results
+print("prediction be: ", prediction)
+move = np.around(aceBot.forward(cardAndPlayers))   # Same value as prediction but rounds up or down
+print("move be: ", move)
+
+aceBot.isCorrect(True, move) #after the game is done use the isCorrect to tell the bot if the move was good or not so it can train
+prediction = aceBot.forward(cardAndPlayers)  # Shows the prediction of the results
+print("prediction be: ", prediction)
+move = np.around(aceBot.forward(cardAndPlayers))   # Same value as prediction but rounds up or down
+print("move be: ", move)
+
+aceBot.isCorrect(True, move) #after the game is done use the isCorrect to tell the bot if the move was good or not so it can train
+prediction = aceBot.forward(cardAndPlayers)  # Shows the prediction of the results
+print("prediction be: ", prediction)
+move = np.around(aceBot.forward(cardAndPlayers))   # Same value as prediction but rounds up or down
+print("move be: ", move)
+
+aceBot.isCorrect(True, move) #after the game is done use the isCorrect to tell the bot if the move was good or not so it can train
+prediction = aceBot.forward(cardAndPlayers)  # Shows the prediction of the results
+print("prediction be: ", prediction)
+move = np.around(aceBot.forward(cardAndPlayers))   # Same value as prediction but rounds up or down
+print("move be: ", move)
+
+aceBot.isCorrect(True, move) #after the game is done use the isCorrect to tell the bot if the move was good or not so it can train
+prediction = aceBot.forward(cardAndPlayers)  # Shows the prediction of the results
+print("prediction be: ", prediction)
+move = np.around(aceBot.forward(cardAndPlayers))   # Same value as prediction but rounds up or down
+print("move be: ", move)
+
+aceBot.isCorrect(True, move) #after the game is done use the isCorrect to tell the bot if the move was good or not so it can train
+prediction = aceBot.forward(cardAndPlayers)  # Shows the prediction of the results
+print("prediction be: ", prediction)
+move = np.around(aceBot.forward(cardAndPlayers))   # Same value as prediction but rounds up or down
+print("move be: ", move)
+
+aceBot.isCorrect(True, move) #after the game is done use the isCorrect to tell the bot if the move was good or not so it can train
+prediction = aceBot.forward(cardAndPlayers)  # Shows the prediction of the results
+print("prediction be: ", prediction)
+move = np.around(aceBot.forward(cardAndPlayers))   # Same value as prediction but rounds up or down
+print("move be: ", move)
+
+aceBot.isCorrect(True, move) #after the game is done use the isCorrect to tell the bot if the move was good or not so it can train
+prediction = aceBot.forward(cardAndPlayers)  # Shows the prediction of the results
+print("prediction be: ", prediction)
+move = np.around(aceBot.forward(cardAndPlayers))   # Same value as prediction but rounds up or down
+print("move be: ", move)
+
+aceBot.isCorrect(True, move) #after the game is done use the isCorrect to tell the bot if the move was good or not so it can train
+prediction = aceBot.forward(cardAndPlayers)  # Shows the prediction of the results
+print("prediction be: ", prediction)
+move = np.around(aceBot.forward(cardAndPlayers))   # Same value as prediction but rounds up or down
+print("move be: ", move)
+
+aceBot.isCorrect(True, move) #after the game is done use the isCorrect to tell the bot if the move was good or not so it can train
