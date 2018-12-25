@@ -1,1 +1,1 @@
-print("dab")
+print("ur mum gey")
