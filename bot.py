@@ -43,19 +43,34 @@ class AceBot:
         self.W1 += X.T.dot(self.z2_delta)
         self.W2 += self.z2.T.dot(self.o_delta) 
 
+    def getMove(self, X):
+        buff = self.forward(X)
+        if buff > 0.5:
+            return 1
+        else:
+            return 0
+
     def train (self, X, y):
         o = self.forward(X)
         self.backward(X, y, o)
 
-<<<<<<< HEAD
+#Example definition
 
-NN = AceBot()
-o = NN.forward(X)
-print(o)
-NN.train(X, y)
-o = NN.forward(X)
-print(o)
-=======
-NN = AceBot()
-NN.forward([2, 4])
->>>>>>> origin/master
+aceBot = AceBot()  # New instance of bot
+cardAndPlayers = np.array(([1, 13]), dtype=float)  # Define the card value and the number of players
+prediction = aceBot.forward(cardAndPlayers)  # Shows the prediction of the results
+print(prediction)
+move = np.around(aceBot.forward(cardAndPlayers))   # Same value as prediction but rounds up or down
+print(move)
+
+# After the game is done you need to train off the results
+# If it won set the input to what it's move was and if it lost
+# set it to the opposite one
+buff = np.bitwise_xor(move.astype(int), np.array(([1]), dtype=int))
+did_win = False  # Lets say it won 
+if did_win:
+    aceBot.train(cardAndPlayers, move) # If it won than feed it the move it did
+else:
+    aceBot.train(cardAndPlayers, buff)
+
+# repeat this process until alphaZero
