@@ -47,4 +47,10 @@ class AceBot:
         o = self.forward(X)
         self.backward(X, y, o)
 
+
 NN = AceBot()
+o = NN.forward(X)
+print(o)
+NN.train(X, y)
+o = NN.forward(X)
+print(o)
