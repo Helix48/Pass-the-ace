@@ -47,7 +47,7 @@ print (lowest)
 
 losers = []
 
-for i in players:
+for i in range(nop):
     print(i)
     if players[i] == lowest:
         losers.append(i+1)
