@@ -40,3 +40,16 @@ for i in range(nop):
             players[i] = players[i+1]
             players[i+1] = temp
             print(players)
+
+lowest = min(players)
+
+print (lowest)
+
+losers = []
+
+for i in players:
+    print(i)
+    if players[i] == lowest:
+        losers.append(i+1)
+
+print ("losers are: ", losers)
