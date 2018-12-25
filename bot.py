@@ -28,8 +28,8 @@ class AceBot:
         return o
     
     def sigmoid(self, s):
-        return 1/(1+np.exp(-s))
-        
+        return 1/(1+np.exp(-s)) 
+
     def sigmoidPrime(self, s):
         return s*(1-s)
 
