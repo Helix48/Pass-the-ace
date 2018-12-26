@@ -99,7 +99,7 @@ class gameplay:
     def randomCard(self, deck = []):
         ri = randint(0,12)
         while self.deck[ri] == 0:
-            ri = randint(0,12)
+            ri = randint(0,1)
         self.deck[ri] -= 1
         return ri
 
