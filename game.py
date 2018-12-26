@@ -74,7 +74,10 @@ class gameplay:
     def play(self, botChoice):
         for i in range(self.nop):
             #print("Player ", i+1, " would you like to switch or keep (1/0)")
-            choice = randint(0,1)
+            if i == self.botPos:
+                choice = botChoice
+            else:
+                choice = randint(0,1)
             if choice == 1:
                 if i == self.nop-1:
                     self.players[i] = self.randomCard(self.deck)
